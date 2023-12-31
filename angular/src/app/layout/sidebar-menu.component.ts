@@ -63,53 +63,29 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'fas fa-users',
                 'Pages.Users'
             ),
-            new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
-                new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [
+            new MenuItem(this.l('MenuManagement'), '', 'fa fa-solid fa-utensils', '', [
+                new MenuItem(this.l('Pabulum'), '', 'fa fa-solid fa-cookie-bite', '', [
                     new MenuItem(
-                        'Home',
-                        'https://aspnetboilerplate.com?ref=abptmpl',
-                        'far fa-circle'
+                        this.l('AllItems'),
+                        '/app/all-item',
+                        'fa fa-solid fa-list-ol',
+                        'Pages.Roles'
                     ),
                     new MenuItem(
                         'Templates',
                         'https://aspnetboilerplate.com/Templates?ref=abptmpl',
                         'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Samples',
-                        'https://aspnetboilerplate.com/Samples?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Documents',
-                        'https://aspnetboilerplate.com/Pages/Documents?ref=abptmpl',
-                        'far fa-circle'
-                    ),
+                    )
                 ]),
-                new MenuItem('ASP.NET Zero', '', 'fas fa-dot-circle', '', [
+                new MenuItem(this.l('Category'), '', 'fas fa-dot-circle', '', [
                     new MenuItem(
-                        'Home',
+                        this.l('AllCategories'),
                         'https://aspnetzero.com?ref=abptmpl',
                         'far fa-circle'
                     ),
                     new MenuItem(
-                        'Features',
+                        'Templates',
                         'https://aspnetzero.com/Features?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Pricing',
-                        'https://aspnetzero.com/Pricing?ref=abptmpl#pricing',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Faq',
-                        'https://aspnetzero.com/Faq?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Documents',
-                        'https://aspnetzero.com/Documents?ref=abptmpl',
                         'far fa-circle'
                     )
                 ])

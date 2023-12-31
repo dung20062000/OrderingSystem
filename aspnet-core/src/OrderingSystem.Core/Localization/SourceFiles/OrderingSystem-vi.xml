@@ -4,29 +4,35 @@
 		<text name="HomePage" value="Trang Chủ" />
 		<text name="About" value="Tìm hiểu thêm" />
 		<text name="WelcomeMessage" value="Xin chào đến với ứng dụng gọi món" />
-		<text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
-		<text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
-		<text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
-		<text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
-		<text name="TenantIsNotActive" value="Tenant {0} is not active." />
-		<text name="UserIsNotActiveAndCanNotLogin" value="User {0} is not active and can not log in." />
-		<text name="UserEmailIsNotConfirmedAndCanNotLogin">Your email address is not confirmed. You can not login.</text>
-		<text name="UserLockedOutMessage">The user account has been locked out. Please try again later.</text>
-		<text name="PleaseEnterLoginInformation" value="Please enter login information" />
-		<text name="TenancyName" value="Tenancy name" />
-		<text name="UserNameOrEmail" value="User name or email" />
-		<text name="Password" value="Password" />
-		<text name="ResetPassword" value="Reset Password" />
-		<text name="UpdatePassword" value="Update Password" />
-		<text name="RememberMe" value="Remember me" />
-		<text name="LogIn" value="Log in" />
-		<text name="LoginFailed" value="Login failed!" />
-		<text name="NameSurname" value="Name surname" />
-		<text name="UserName" value="User name" />
-		<text name="Name" value="Name" />
-		<text name="Surname" value="Surname" />
-		<text name="EmailAddress" value="Email address" />
+		<text name="FormIsNotValidMessage" value="Biểu mẫu không hợp lệ. Vui lòng kiểm tra và sửa lỗi." />
+		<text name="TenantNameCanNotBeEmpty" value="Tên người thuê (Tenant) không được để trống" />
+		<text name="InvalidUserNameOrPassword" value="Sai tên đăng nhập hoặc mật khẩu" />
+		<text name="ThereIsNoTenantDefinedWithName{0}" value="Không có người thuê nhà được xác định bằng tên {0}" />
+		<text name="TenantIsNotActive" value="Người thuê nhà (Tenant) {0} không hoạt động." />
+		<text name="UserIsNotActiveAndCanNotLogin" value="Người dùng {0} không hoạt động và không thể đăng nhập." />
+		<text name="UserEmailIsNotConfirmedAndCanNotLogin">Người dùng Email Không được xác nhận và không thể đăng nhập.</text>
+		<text name="UserLockedOutMessage">Tin nhắn người dùng bị khóa.</text>
+		<text name="PleaseEnterLoginInformation" value="Vui lòng nhậpThông tin đăng nhập" />
+		<text name="TenancyName" value="Tên thuê nhà (Tenant)" />
+		<text name="UserNameOrEmail" value="Tên người dùng hoặc email" />
+		<text name="Password" value="Mật khẩu" />
+		<text name="ResetPassword" value="Đặt lại mật khẩu" />
+		<text name="UpdatePassword" value="Cập nhậtMật khẩu" />
+		<text name="RememberMe" value="Nhớ tôi" />
+		<text name="LogIn" value="Đăng nhập" />
+		<text name="LoginFailed" value="Đăng nhập thất bại!" />
+		<text name="NameSurname" value="Tên họ" />
+		<text name="UserName" value="Tên tài khoản" />
+		<text name="Name" value="Tên" />
+		<text name="Surname" value="Họ" />
+		<text name="EmailAddress" value="Địa chỉ Email" />
 		<text name="Tenants" value="Tenants" />
+		<text name="MenuManagement" value="Quản lí thực đơn" />
+		<text name="Pabulum" value="Món ăn" />
+		<text name="AllItems" value="Tất cả món ăn" />
+		<text name="Category" value="Danh mục" />
+		<text name="AllCategories" value="Tất cả danh muc" />
+
 		<text name="SavedSuccessfully" value="Saved successfully" />
 		<text name="CreateNewTenant" value="Create new tenant" />
 		<text name="AdminEmailAddress" value="Admin email address" />

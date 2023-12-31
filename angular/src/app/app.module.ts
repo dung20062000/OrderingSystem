@@ -38,6 +38,10 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+//menu-item
+import { AllItemComponent } from './ods-menu/all-item/all-item.component';
+import {TableModule} from 'primeng/table';
+
 
 @NgModule({
   declarations: [
@@ -67,8 +71,10 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     SidebarComponent,
     SidebarLogoComponent,
     SidebarUserPanelComponent,
-    SidebarMenuComponent
-  ],
+    SidebarMenuComponent,
+    //menu
+    AllItemComponent,
+   ],
   imports: [
     CommonModule,
     FormsModule,
@@ -83,6 +89,7 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
+    TableModule
   ],
   providers: [],
   entryComponents: [
