@@ -4,6 +4,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { MessageService } from 'primeng/api';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { forkJoin } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   templateUrl: './home.component.html',
@@ -32,4 +33,11 @@ export class HomeComponent extends AppComponentBase {
       complete: () => console.log('all done')
     })
   }
+  // checksniper(){
+  //   this.showMainSpinner() ;
+  //   setTimeout(() => {
+  //     /** spinner ends after 5 seconds */
+  //     this.hideMainSpinner();
+  //   }, 5000);
+  // }
 }

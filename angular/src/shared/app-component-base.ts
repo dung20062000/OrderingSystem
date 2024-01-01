@@ -11,6 +11,7 @@ import {
 } from 'abp-ng2-module';
 
 import { AppSessionService } from '@shared/session/app-session.service';
+// import { NgxSpinnerService } from 'ngx-spinner';
 
 export abstract class AppComponentBase {
 
@@ -25,6 +26,7 @@ export abstract class AppComponentBase {
     multiTenancy: AbpMultiTenancyService;
     appSession: AppSessionService;
     elementRef: ElementRef;
+    // spinnerService: NgxSpinnerService;
 
     constructor(injector: Injector) {
         this.localization = injector.get(LocalizationService);
@@ -36,6 +38,7 @@ export abstract class AppComponentBase {
         this.multiTenancy = injector.get(AbpMultiTenancyService);
         this.appSession = injector.get(AppSessionService);
         this.elementRef = injector.get(ElementRef);
+        // this.spinnerService = injector.get(NgxSpinnerService);
     }
 
     l(key: string, ...args: any[]): string {
@@ -56,4 +59,14 @@ export abstract class AppComponentBase {
     isGranted(permissionName: string): boolean {
         return this.permission.isGranted(permissionName);
     }
+    // showMainSpinner(): void {
+    //     this.spinnerService.show();
+    // }
+    // hideMainSpinner(): void {
+    //     this.spinnerService.hide();
+    // }
+    // toggleLoading(params){
+    //     if ( params ) this.spinnerService.show();
+    //     else this.spinnerService.hide();
+    // }
 }
