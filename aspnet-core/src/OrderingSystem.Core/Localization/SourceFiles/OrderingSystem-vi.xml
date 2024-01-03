@@ -5,6 +5,7 @@
 		<text name="About" value="Tìm hiểu thêm" />
 		<text name="WelcomeMessage" value="Xin chào đến với ứng dụng gọi món" />
 		<text name="FormIsNotValidMessage" value="Biểu mẫu không hợp lệ. Vui lòng kiểm tra và sửa lỗi." />
+<<<<<<< HEAD
 		<text name="TenantNameCanNotBeEmpty" value="Tên người thuê không được để trống" />
 		<text name="InvalidUserNameOrPassword" value="Sai tên người dùng hoặc mật khẩu" />
 		<text name="ThereIsNoTenantDefinedWithName{0}" value="Không có người thuê nhà được xác định bằng tên {0}" />
@@ -34,6 +35,43 @@
 		<text name="Save" value="Lưu" />
 		<text name="Cancel" value="Hủy bỏ" />
 		<text name="TenantName_Regex_Description" value="Tên đối tượng thuê phải có ít nhất 2 ký tự, bắt đầu bằng một chữ cái và tiếp tục bằng chữ cái, số, dấu gạch ngang hoặc dấu gạch dưới." />
+=======
+		<text name="TenantNameCanNotBeEmpty" value="Tên người thuê (Tenant) không được để trống" />
+		<text name="InvalidUserNameOrPassword" value="Sai tên đăng nhập hoặc mật khẩu" />
+		<text name="ThereIsNoTenantDefinedWithName{0}" value="Không có người thuê nhà được xác định bằng tên {0}" />
+		<text name="TenantIsNotActive" value="Người thuê nhà (Tenant) {0} không hoạt động." />
+		<text name="UserIsNotActiveAndCanNotLogin" value="Người dùng {0} không hoạt động và không thể đăng nhập." />
+		<text name="UserEmailIsNotConfirmedAndCanNotLogin">Người dùng Email Không được xác nhận và không thể đăng nhập.</text>
+		<text name="UserLockedOutMessage">Tin nhắn người dùng bị khóa.</text>
+		<text name="PleaseEnterLoginInformation" value="Vui lòng nhậpThông tin đăng nhập" />
+		<text name="TenancyName" value="Tên thuê nhà (Tenant)" />
+		<text name="UserNameOrEmail" value="Tên người dùng hoặc email" />
+		<text name="Password" value="Mật khẩu" />
+		<text name="ResetPassword" value="Đặt lại mật khẩu" />
+		<text name="UpdatePassword" value="Cập nhậtMật khẩu" />
+		<text name="RememberMe" value="Nhớ tôi" />
+		<text name="LogIn" value="Đăng nhập" />
+		<text name="LoginFailed" value="Đăng nhập thất bại!" />
+		<text name="NameSurname" value="Tên họ" />
+		<text name="UserName" value="Tên tài khoản" />
+		<text name="Name" value="Tên" />
+		<text name="Surname" value="Họ" />
+		<text name="EmailAddress" value="Địa chỉ Email" />
+		<text name="Tenants" value="Tenants" />
+		<text name="MenuManagement" value="Quản lí thực đơn" />
+		<text name="Pabulum" value="Món ăn" />
+		<text name="AllItems" value="Tất cả món ăn" />
+		<text name="Category" value="Danh mục" />
+		<text name="AllCategories" value="Tất cả danh muc" />
+
+		<text name="SavedSuccessfully" value="Saved successfully" />
+		<text name="CreateNewTenant" value="Create new tenant" />
+		<text name="AdminEmailAddress" value="Admin email address" />
+		<text name="AdminPassword" value="Admin password" />
+		<text name="Save" value="Save" />
+		<text name="Cancel" value="Cancel" />
+		<text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
+>>>>>>> DungBT
 		<text name="DefaultPasswordIs" value="Default password is {0}" />
 		<text name="CanBeEmptyToLoginAsHost" value="Có thể trống để đăng nhập với tư cách là chủ nhà." />
 		<text name="Register" value="Đăng ký" />

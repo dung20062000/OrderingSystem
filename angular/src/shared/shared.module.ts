@@ -17,12 +17,25 @@ import { LayoutStoreService } from './layout/layout-store.service';
 
 import { BusyDirective } from './directives/busy.directive';
 import { EqualValidator } from './directives/equal-validator.directive';
+//-------
+import { ButtonModule } from 'primeng/button';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { environment } from 'environments/environment';
+import {TableModule} from 'primeng/table';
+
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ButtonModule,
+        FileUploadModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireStorageModule,
+        TableModule
     ],
     declarations: [
         AbpPaginationControlsComponent,
@@ -31,7 +44,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
         AbpModalFooterComponent,
         LocalizePipe,
         BusyDirective,
-        EqualValidator
+        EqualValidator,
     ],
     exports: [
         AbpPaginationControlsComponent,
@@ -40,8 +53,10 @@ import { EqualValidator } from './directives/equal-validator.directive';
         AbpModalFooterComponent,
         LocalizePipe,
         BusyDirective,
-        EqualValidator
-    ]
+        EqualValidator,
+        FileUpload,
+    ],
+    providers: [],
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders<SharedModule> {

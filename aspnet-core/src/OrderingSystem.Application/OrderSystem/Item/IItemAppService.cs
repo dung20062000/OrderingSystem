@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using OrderingSystem.OrderSystem.Item.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace OrderingSystem.OrderSystem.Item
     public interface IItemAppService : IApplicationService
     {
         Task CreateOrEdit(CreateOrEditItemDto itemDto);
+        Task<PagedResultDto<GetItemForViewDto>> GetAll(GetItemInputDto input);
     }
 }

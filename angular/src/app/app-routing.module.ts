@@ -9,6 +9,9 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 
+import { AllItemComponent } from './ods-menu/all-item/all-item.component';
+
+
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -21,7 +24,10 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
-                    { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] }
+                    { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
+
+                    { path: 'all-item', component: AllItemComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
+
                 ]
             }
         ])
