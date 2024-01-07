@@ -1,1 +1,17 @@
 
+.p-odd {
+    background-color: #e9e9e9 !important; /* Màu nền cho hàng lẻ */
+}
+
+.p-even {
+    background-color: #d6dfd3 !important; /* Màu nền cho hàng chẵn */
+}
+
+.text-green-500 {
+    color: var(--green-500)!important;
+}
+
+.text-red-500 {
+    color: var(--red-500)!important;
+}
+

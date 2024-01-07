@@ -2335,6 +2335,7 @@ export class CreateOrEditItemDto implements ICreateOrEditItemDto {
     categoryId: number;
     userId: number;
     tenantId: number | undefined;
+    isDisplay: boolean;
     longDescription: string | undefined;
     sortDescription: string | undefined;
     imgUrl: string | undefined;
@@ -2357,6 +2358,7 @@ export class CreateOrEditItemDto implements ICreateOrEditItemDto {
             this.categoryId = _data["categoryId"];
             this.userId = _data["userId"];
             this.tenantId = _data["tenantId"];
+            this.isDisplay = _data["isDisplay"];
             this.longDescription = _data["longDescription"];
             this.sortDescription = _data["sortDescription"];
             this.imgUrl = _data["imgUrl"];
@@ -2379,6 +2381,7 @@ export class CreateOrEditItemDto implements ICreateOrEditItemDto {
         data["categoryId"] = this.categoryId;
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
+        data["isDisplay"] = this.isDisplay;
         data["longDescription"] = this.longDescription;
         data["sortDescription"] = this.sortDescription;
         data["imgUrl"] = this.imgUrl;
@@ -2401,6 +2404,7 @@ export interface ICreateOrEditItemDto {
     categoryId: number;
     userId: number;
     tenantId: number | undefined;
+    isDisplay: boolean;
     longDescription: string | undefined;
     sortDescription: string | undefined;
     imgUrl: string | undefined;
@@ -2870,6 +2874,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
     categoryId: number;
     userId: number;
     tenantId: number | undefined;
+    isDisplay: boolean;
     longDescription: string | undefined;
     sortDescription: string | undefined;
     imgUrl: string | undefined;
@@ -2892,6 +2897,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
             this.categoryId = _data["categoryId"];
             this.userId = _data["userId"];
             this.tenantId = _data["tenantId"];
+            this.isDisplay = _data["isDisplay"];
             this.longDescription = _data["longDescription"];
             this.sortDescription = _data["sortDescription"];
             this.imgUrl = _data["imgUrl"];
@@ -2914,6 +2920,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
         data["categoryId"] = this.categoryId;
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
+        data["isDisplay"] = this.isDisplay;
         data["longDescription"] = this.longDescription;
         data["sortDescription"] = this.sortDescription;
         data["imgUrl"] = this.imgUrl;
@@ -2936,6 +2943,7 @@ export interface IGetItemForViewDto {
     categoryId: number;
     userId: number;
     tenantId: number | undefined;
+    isDisplay: boolean;
     longDescription: string | undefined;
     sortDescription: string | undefined;
     imgUrl: string | undefined;

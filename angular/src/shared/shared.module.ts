@@ -24,6 +24,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from 'environments/environment';
 import {TableModule} from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 // import { NgxSpinnerModule, NgxSpinnerComponent } from 'ngx-spinner';
 
 
@@ -37,6 +38,7 @@ import {TableModule} from 'primeng/table';
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireStorageModule,
         TableModule,
+        PaginatorModule,
         // NgxSpinnerModule.forRoot()
     ],
     declarations: [
@@ -59,6 +61,7 @@ import {TableModule} from 'primeng/table';
         FileUpload,
         ButtonModule,
         TableModule,
+        PaginatorModule,
         // NgxSpinnerModule
     ],
     providers: [],

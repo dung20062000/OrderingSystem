@@ -1,6 +1,14 @@
 <p-table
     #dt1
     dataKey="id"
+    [value]="rowData"
+    [scrollable]="true"
+    selectionMode="multiple"
+    [paginator]="true"
+    [rows]="20"
+    [showCurrentPageReport]="true"
+    responsiveLayout="scroll"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[20,40,60]"
 >
     <ng-template pTemplate="caption">
         <div class="flex">
@@ -48,121 +56,82 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th style="min-width:15rem">
+             <th style="min-width:1rem" pFrozenColumn>  <!--stt -->
                 <div class="flex align-items-center">
-                    Name
-                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                    {{l("NumericalOrder")}}
                 </div>
             </th>
-            <th style="min-width:15rem">
+            <th style="min-width:15rem" pFrozenColumn>    <!--tên -->
                 <div class="flex align-items-center">
-                    Country
-                    <p-columnFilter type="text" field="country.name" display="menu"></p-columnFilter>
+                    {{l("FoodName")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="min-width:15rem">
+            <th style="min-width:15rem" pFrozenColumn>    <!--ảnh -->
                 <div class="flex align-items-center">
-                    Agent
-                    <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="header">
-                            <div class="px-3 pt-3 pb-0">
-                                <span class="font-bold">Agent Picker</span>
-                            </div>
-                        </ng-template>
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.name }}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter>
+                    {{l("Image")}}
                 </div>
             </th>
-            <th style="min-width:10rem">
+            <th style="min-width:10rem">    <!--danh mục -->
                 <div class="flex align-items-center">
-                    Date
-                    <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                    {{l("Category")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="min-width:10rem">
+            <th style="min-width:10rem">    <!--Discount -->
                 <div class="flex align-items-center">
-                    Balance
-                    <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+                    {{l("Discount")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="min-width:10rem">
+            <th style="min-width:10rem">    <!--price -->
                 <div class="flex align-items-center">
-                    Status
-                    <!-- <p-columnFilter field="status" matchMode="equals" display="menu">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
-                                <ng-template let-option pTemplate="item">
-                                    <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag>
-                                </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter> -->
+                    {{l("Price")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="min-width:10rem">
+            <th style="min-width:10rem">    <!--Status -->
                 <div class="flex align-items-center">
-                    Activity
-                    <!-- <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="filter" let-filter="filterCallback">
-                            <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="m-3"></p-slider>
-                            <div class="flex align-items-center px-2">
-                                <span>{{ activityValues[0] }}</span>
-                                <span>{{ activityValues[1] }}</span>
-                            </div>
-                        </ng-template>
-                    </p-columnFilter> -->
+                    {{l("Status")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="width: 3rem">
+            <!-- <th style="width: 3rem">
                 <div class="flex align-items-center">
-                    Verified
-                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                    {{l("Action")}}
+                    <p-columnFilter type="text" field="" display="menu"></p-columnFilter>
                 </div>
-            </th>
+            </th> -->
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-customer>
-        <tr>
-            <td>
-                <!-- {{ customer.name }} -->
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+        <tr [class.p-odd]="rowIndex % 2 === 0" [class.p-even]="rowIndex % 2 !== 0">
+            <td style="min-width:1rem" pFrozenColumn>
+                {{rowIndex + 1}}
             </td>
-            <td>
-                <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />
-                <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span> -->
+            <td style="min-width:15rem" pFrozenColumn>
+                {{ rowData.itemName }}
             </td>
-            <td>
-                <!-- <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
-                <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span> -->
+            <td style="min-width:15rem" pFrozenColumn>
+                {{ rowData.imgUrl }}
             </td>
-            <td>
-                <!-- {{ customer.date | date: 'MM/dd/yyyy' }} -->
+            <td style="min-width:10rem">
+                {{ rowData.categoryId }}
             </td>
-            <td>
-                <!-- {{ customer.balance | currency: 'USD':'symbol' }} -->
+            <td style="min-width:10rem">
+                {{ rowData.discountId }}
             </td>
-            <td>
-                <!-- <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"></p-tag> -->
+            <td style="min-width:10rem">
+                {{ rowData.price }}
             </td>
-            <td>
-                <!-- <p-progressBar [value]="customer.activity" [showValue]="false"></p-progressBar> -->
-            </td>
-            <td class="text-center">
-                <!-- <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': customer.verified, 'text-red-500 pi-times-circle': !customer.verified }"></i> -->
+            <td class="text-center" style="min-width:10rem">
+                <i class="pi" [ngClass]="rowData.isDisplay === true ? 'text-green-500 pi-check-circle' : 'text-red-500 pi-times-circle'"></i>
             </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
         <tr>
-            <td colspan="7">No customers found.</td>
+            <td colspan="7">{{l("NotFound")}}</td>
         </tr>
     </ng-template>
 </p-table>

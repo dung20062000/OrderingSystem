@@ -33,6 +33,7 @@ namespace OrderingSystem.OrderSystem.Item
                                 SortDescription = items.SortDescription,
                                 Price = items.Price,
                                 LongDescription = items.LongDescription,
+                                isDisplay = items.isDisplay,
                                 DiscountId = items.DiscountId,
                                 CategoryId = items.CategoryId,
                                 ImgUrl = items.ImgUrl,
