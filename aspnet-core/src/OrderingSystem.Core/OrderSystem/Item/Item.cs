@@ -17,7 +17,7 @@ namespace OrderingSystem.OrderSystem.Item
         public int DiscountId { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
-        //public bool isDisplay { get; set; }
+        public bool isDisplay { get; set; }
         public int? TenantId { get; set; }
         public string LongDescription { get; set; }
         public string SortDescription { get; set; }

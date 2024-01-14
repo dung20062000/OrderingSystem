@@ -40,7 +40,6 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 //menu-item
 import { AllItemComponent } from './ods-menu/all-item/all-item.component';
-import {TableModule} from 'primeng/table';
 
 
 @NgModule({
@@ -89,7 +88,6 @@ import {TableModule} from 'primeng/table';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
-    TableModule
   ],
   providers: [],
   entryComponents: [

@@ -1,3 +1,6 @@
-@import "primeng/resources/themes/saga-blue/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
+/* Định nghĩa biến màu */
+:root {
+    --green-500: #42cf01;
+    --red-500: #f00808;
+}
+
