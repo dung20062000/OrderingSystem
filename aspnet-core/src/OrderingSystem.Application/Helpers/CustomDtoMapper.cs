@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using OrderingSystem.OrderSystem.Category;
+using OrderingSystem.OrderSystem.Category.Dto;
 using OrderingSystem.OrderSystem.Item;
 using OrderingSystem.OrderSystem.Item.Dto;
 using System;
@@ -14,6 +16,8 @@ namespace OrderingSystem.Helpers
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<OdsItem, CreateOrEditItemDto>().ReverseMap();
+            configuration.CreateMap<OdsCategory, CreateOrEditCategoryDto>().ReverseMap();
+            configuration.CreateMap<OdsItemCategory, CreateOrEditItemDto>().ReverseMap();
         }
     }
 }

@@ -39,5 +39,10 @@
 		<text name="Price" value="Giá bán" />
 		<text name="Status" value="Trạng thái" />
 		<text name="NotFound" value="Không có dữ liệu." />
+		<text name="CreateNewItem" value="Thêm món mới" />
+		<text name="ItemDetail" value="Chi tiết món" />
+		<text name="ItemName" value="Tên món" />
+		<text name="SavedSuccessfully" value="Lưu thành công" />
+		<text name="SelectCategory" value="Lựa chọn danh mục" />
 	</texts>
 </localizationDictionary>

@@ -1,3 +1,4 @@
+import { CreateOrEditItemComponent } from './ods-menu/create-or-edit-item/create-or-edit-item.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { AllItemComponent } from './ods-menu/all-item/all-item.component';
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
 
-                    { path: 'all-item', component: AllItemComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
+                    { path: 'all-item', component: AllItemComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard],
+                },
 
                 ]
             }

@@ -1,9 +1,12 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { ItemServiceProxy } from '@shared/service-proxies/service-proxies';
 import { PaginationParamsModel } from '@shared/common/models/base.model';
 import { Table } from 'primeng/table';
 import { ceil } from 'lodash';
+import { CreateOrEditItemComponent } from '../create-or-edit-item/create-or-edit-item.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-all-item',
@@ -11,6 +14,7 @@ import { ceil } from 'lodash';
   styleUrls: ['./all-item.component.css']
 })
 export class AllItemComponent extends AppComponentBase {
+  //@ViewChild('#createOrEditItemComponent') createOrEditItemComponent: CreateOrEditItemComponent;
   filterText;
   sorting: string = "";
   paginationParams: PaginationParamsModel;
@@ -20,6 +24,7 @@ export class AllItemComponent extends AppComponentBase {
   constructor(
     injector: Injector,
     private _itemServiceProxy: ItemServiceProxy,
+    private _modalService: BsModalService
     ) {
     super(injector);
   }
@@ -27,7 +32,6 @@ export class AllItemComponent extends AppComponentBase {
     this.rowData = [];
     this.paginationParams = { pageNum: 1, pageSize: 20, totalCount: 0 };
     this.getAll(this.paginationParams).subscribe(data => {
-      console.log(data.items);
       this.rowData = data.items;
       this.paginationParams.totalPage = ceil(data.totalCount / this.maxResultCount);
       this.paginationParams.totalCount = data.totalCount;
@@ -46,5 +50,13 @@ export class AllItemComponent extends AppComponentBase {
 
   clear(table: Table) {
     table.clear();
+  }
+  createItem() {
+   this._modalService.show(
+    CreateOrEditItemComponent,
+    {
+      class: 'modal-lg',
+    }
+  );
   }
 }

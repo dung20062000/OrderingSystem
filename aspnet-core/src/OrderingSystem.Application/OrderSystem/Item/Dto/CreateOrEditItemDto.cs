@@ -14,7 +14,7 @@ namespace OrderingSystem.OrderSystem.Item.Dto
         public string ItemName { get; set; }
         public decimal Price { get; set; }
         public int? DiscountId { get; set; }
-        public int CategoryId { get; set; }
+        public List<int> CategoryIds { get; set; }
         public int UserId { get; set; }
         public int? TenantId { get; set; }
         public bool isDisplay { get; set; }

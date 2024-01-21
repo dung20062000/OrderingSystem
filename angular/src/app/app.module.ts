@@ -40,6 +40,8 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 //menu-item
 import { AllItemComponent } from './ods-menu/all-item/all-item.component';
+import { CreateOrEditItemComponent } from './ods-menu/create-or-edit-item/create-or-edit-item.component';
+
 
 
 @NgModule({
@@ -73,6 +75,8 @@ import { AllItemComponent } from './ods-menu/all-item/all-item.component';
     SidebarMenuComponent,
     //menu
     AllItemComponent,
+    CreateOrEditItemComponent
+
    ],
   imports: [
     CommonModule,
@@ -101,6 +105,7 @@ import { AllItemComponent } from './ods-menu/all-item/all-item.component';
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ResetPasswordDialogComponent,
+
   ],
 })
 export class AppModule {}

@@ -142,6 +142,251 @@ export class AccountServiceProxy {
 }
 
 @Injectable()
+export class CategoryServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param filterText (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(filterText: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<GetCategoryForViewDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Category/GetAll?";
+        if (filterText === null)
+            throw new Error("The parameter 'filterText' cannot be null.");
+        else if (filterText !== undefined)
+            url_ += "filterText=" + encodeURIComponent("" + filterText) + "&";
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetCategoryForViewDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetCategoryForViewDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<GetCategoryForViewDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetCategoryForViewDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetCategoryForViewDtoPagedResultDto>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getAllForCreateItem(): Observable<GetCategoryForViewDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Category/GetAllForCreateItem";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllForCreateItem(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllForCreateItem(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetCategoryForViewDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetCategoryForViewDto[]>;
+        }));
+    }
+
+    protected processGetAllForCreateItem(response: HttpResponseBase): Observable<GetCategoryForViewDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(GetCategoryForViewDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetCategoryForViewDto[]>(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditCategoryDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Category/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Category/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+}
+
+@Injectable()
 export class ConfigurationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -2327,12 +2572,63 @@ export interface IChangeUserLanguageDto {
     languageName: string;
 }
 
+export class CreateOrEditCategoryDto implements ICreateOrEditCategoryDto {
+    id: number | undefined;
+    categoryName: string | undefined;
+    isDisplay: boolean;
+
+    constructor(data?: ICreateOrEditCategoryDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.categoryName = _data["categoryName"];
+            this.isDisplay = _data["isDisplay"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditCategoryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditCategoryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["categoryName"] = this.categoryName;
+        data["isDisplay"] = this.isDisplay;
+        return data;
+    }
+
+    clone(): CreateOrEditCategoryDto {
+        const json = this.toJSON();
+        let result = new CreateOrEditCategoryDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateOrEditCategoryDto {
+    id: number | undefined;
+    categoryName: string | undefined;
+    isDisplay: boolean;
+}
+
 export class CreateOrEditItemDto implements ICreateOrEditItemDto {
     id: number | undefined;
     itemName: string | undefined;
     price: number;
     discountId: number | undefined;
-    categoryId: number;
+    categoryIds: number[] | undefined;
     userId: number;
     tenantId: number | undefined;
     isDisplay: boolean;
@@ -2355,7 +2651,11 @@ export class CreateOrEditItemDto implements ICreateOrEditItemDto {
             this.itemName = _data["itemName"];
             this.price = _data["price"];
             this.discountId = _data["discountId"];
-            this.categoryId = _data["categoryId"];
+            if (Array.isArray(_data["categoryIds"])) {
+                this.categoryIds = [] as any;
+                for (let item of _data["categoryIds"])
+                    this.categoryIds.push(item);
+            }
             this.userId = _data["userId"];
             this.tenantId = _data["tenantId"];
             this.isDisplay = _data["isDisplay"];
@@ -2378,7 +2678,11 @@ export class CreateOrEditItemDto implements ICreateOrEditItemDto {
         data["itemName"] = this.itemName;
         data["price"] = this.price;
         data["discountId"] = this.discountId;
-        data["categoryId"] = this.categoryId;
+        if (Array.isArray(this.categoryIds)) {
+            data["categoryIds"] = [];
+            for (let item of this.categoryIds)
+                data["categoryIds"].push(item);
+        }
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
         data["isDisplay"] = this.isDisplay;
@@ -2401,7 +2705,7 @@ export interface ICreateOrEditItemDto {
     itemName: string | undefined;
     price: number;
     discountId: number | undefined;
-    categoryId: number;
+    categoryIds: number[] | undefined;
     userId: number;
     tenantId: number | undefined;
     isDisplay: boolean;
@@ -2815,6 +3119,116 @@ export interface IFlatPermissionDto {
     description: string | undefined;
 }
 
+export class GetCategoryForViewDto implements IGetCategoryForViewDto {
+    id: number | undefined;
+    categoryName: string | undefined;
+    isDisplay: boolean;
+    tenantId: number | undefined;
+
+    constructor(data?: IGetCategoryForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.categoryName = _data["categoryName"];
+            this.isDisplay = _data["isDisplay"];
+            this.tenantId = _data["tenantId"];
+        }
+    }
+
+    static fromJS(data: any): GetCategoryForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetCategoryForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["categoryName"] = this.categoryName;
+        data["isDisplay"] = this.isDisplay;
+        data["tenantId"] = this.tenantId;
+        return data;
+    }
+
+    clone(): GetCategoryForViewDto {
+        const json = this.toJSON();
+        let result = new GetCategoryForViewDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetCategoryForViewDto {
+    id: number | undefined;
+    categoryName: string | undefined;
+    isDisplay: boolean;
+    tenantId: number | undefined;
+}
+
+export class GetCategoryForViewDtoPagedResultDto implements IGetCategoryForViewDtoPagedResultDto {
+    items: GetCategoryForViewDto[] | undefined;
+    totalCount: number;
+
+    constructor(data?: IGetCategoryForViewDtoPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(GetCategoryForViewDto.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+        }
+    }
+
+    static fromJS(data: any): GetCategoryForViewDtoPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetCategoryForViewDtoPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        return data;
+    }
+
+    clone(): GetCategoryForViewDtoPagedResultDto {
+        const json = this.toJSON();
+        let result = new GetCategoryForViewDtoPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetCategoryForViewDtoPagedResultDto {
+    items: GetCategoryForViewDto[] | undefined;
+    totalCount: number;
+}
+
 export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
@@ -2871,8 +3285,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
     itemName: string | undefined;
     price: number;
     discountId: number;
-    categoryId: number;
-    userId: number;
+    categoryName: string | undefined;
     tenantId: number | undefined;
     isDisplay: boolean;
     longDescription: string | undefined;
@@ -2894,8 +3307,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
             this.itemName = _data["itemName"];
             this.price = _data["price"];
             this.discountId = _data["discountId"];
-            this.categoryId = _data["categoryId"];
-            this.userId = _data["userId"];
+            this.categoryName = _data["categoryName"];
             this.tenantId = _data["tenantId"];
             this.isDisplay = _data["isDisplay"];
             this.longDescription = _data["longDescription"];
@@ -2917,8 +3329,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
         data["itemName"] = this.itemName;
         data["price"] = this.price;
         data["discountId"] = this.discountId;
-        data["categoryId"] = this.categoryId;
-        data["userId"] = this.userId;
+        data["categoryName"] = this.categoryName;
         data["tenantId"] = this.tenantId;
         data["isDisplay"] = this.isDisplay;
         data["longDescription"] = this.longDescription;
@@ -2940,8 +3351,7 @@ export interface IGetItemForViewDto {
     itemName: string | undefined;
     price: number;
     discountId: number;
-    categoryId: number;
-    userId: number;
+    categoryName: string | undefined;
     tenantId: number | undefined;
     isDisplay: boolean;
     longDescription: string | undefined;

@@ -1,3 +1,16 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <!-- <h1>{{ "Users" | localize }}</h1> -->
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn bg-blue" (click)="createItem()">
+                <i class="fa fa-plus-square"></i>
+                {{l("Create")}}
+            </button>
+        </div>
+    </div>
+</div>
 <p-table
     #dt1
     dataKey="id"
@@ -116,7 +129,7 @@
                 {{ rowData.imgUrl }}
             </td>
             <td style="min-width:10rem">
-                {{ rowData.categoryId }}
+                {{ rowData.categoryName }}
             </td>
             <td style="min-width:10rem">
                 {{ rowData.discountId }}

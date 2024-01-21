@@ -1,0 +1,155 @@
+<form
+  class="form-horizontal custom-form"
+  autocomplete="off"
+  #createOrEditItemComponent="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]='l("CreateNewItem")'
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <tabset>
+      <tab [heading]='l("ItemDetail")' class="pt-3 px-2">
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="itemName">
+            {{l("ItemName")}}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="itemName"
+              id="itemName"
+              required
+              [(ngModel)]="odsItem.itemName"
+              #nameModel="ngModel"
+              #nameEl
+            />
+            <abp-validation-summary
+              [control]="nameModel"
+              [controlEl]="nameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="itemPrice">
+            {{l("Price")}}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="number"
+              class="form-control"
+              name="itemPrice"
+              id="itemPrice"
+              required
+              maxlength="7"
+              [(ngModel)]="odsItem.price"
+              #priceModel="ngModel"
+              #priceItemEl
+            />
+            <abp-validation-summary
+              [control]="priceModel"
+              [controlEl]="priceItemEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="category">
+            {{l("Category")}}
+          </label>
+          <div class="card flex justify-content-center">
+            <p-multiSelect
+              id="category"
+              [options]="listCategory"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="odsItem.categoryIds"
+              (onChange)="onCategoriesChange($event)"
+               optionLabel="label"
+              [placeholder]='l("SelectCategory")'></p-multiSelect>
+          </div>
+        </div>
+        <!-- <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="password">
+            {{ "Password" | localize }}
+          </label>
+          <div class="col-md-9">
+            <div class="card flex justify-content-center">
+                <p-dropdown [options]="listDiscount" [(ngModel)]="selectedDiscount.discountId" optionLabel="label" [showClear]="true" [placeholder]='l("SelectDiscount")'></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="confirmPassword">
+            {{ "ConfirmPassword" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="password"
+              class="form-control"
+              name="confirmPassword"
+              id="confirmPassword"
+              required
+              maxlength="32"
+              validateEqual="password"
+              reverse="false"
+              ngModel
+              #confirmPasswordModel="ngModel"
+              #confirmPasswordEl
+            />
+            <abp-validation-summary
+              [control]="confirmPasswordModel"
+              [controlEl]="confirmPasswordEl"
+              [customValidationErrors]="confirmPasswordValidationErrors"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="emailAddress">
+            {{ "EmailAddress" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="email"
+              class="form-control"
+              name="emailAddress"
+              id="emailAddress"
+              required
+              maxlength="256"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+              [(ngModel)]="user.emailAddress"
+              #emailAddressModel="ngModel"
+              #emailAddressEl
+            />
+            <abp-validation-summary
+              [control]="emailAddressModel"
+              [controlEl]="emailAddressEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row mb-0">
+          <label class="col-md-3 col-form-label">
+            {{ "IsActive" | localize }}
+          </label>
+          <div class="col-md-9">
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                name="isActive"
+                id="isActive"
+                [(ngModel)]="user.isActive"
+              />
+              <label class="custom-control-label mt-2" for="isActive"></label>
+            </div>
+          </div>
+        </div> -->
+      </tab>
+    </tabset>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createOrEditItemComponent.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>

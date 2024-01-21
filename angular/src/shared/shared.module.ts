@@ -25,6 +25,9 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from 'environments/environment';
 import {TableModule} from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 // import { NgxSpinnerModule, NgxSpinnerComponent } from 'ngx-spinner';
 
 
@@ -39,6 +42,9 @@ import { PaginatorModule } from 'primeng/paginator';
         AngularFireStorageModule,
         TableModule,
         PaginatorModule,
+        ModalModule,
+        MultiSelectModule,
+        DropdownModule
         // NgxSpinnerModule.forRoot()
     ],
     declarations: [
@@ -62,6 +68,8 @@ import { PaginatorModule } from 'primeng/paginator';
         ButtonModule,
         TableModule,
         PaginatorModule,
+        MultiSelectModule,
+        DropdownModule
         // NgxSpinnerModule
     ],
     providers: [],

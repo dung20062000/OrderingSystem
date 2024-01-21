@@ -13,5 +13,6 @@ namespace OrderingSystem.OrderSystem.Item
     {
         Task CreateOrEdit(CreateOrEditItemDto itemDto);
         Task<PagedResultDto<GetItemForViewDto>> GetAll(GetItemInputDto input);
+        Task DeleteItem(EntityDto<long> input);
     }
 }
