@@ -28,6 +28,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
 // import { NgxSpinnerModule, NgxSpinnerComponent } from 'ngx-spinner';
 
 
@@ -44,7 +46,9 @@ import { DropdownModule } from 'primeng/dropdown';
         PaginatorModule,
         ModalModule,
         MultiSelectModule,
-        DropdownModule
+        DropdownModule,
+        InputTextareaModule,
+        CheckboxModule
         // NgxSpinnerModule.forRoot()
     ],
     declarations: [
@@ -69,7 +73,9 @@ import { DropdownModule } from 'primeng/dropdown';
         TableModule,
         PaginatorModule,
         MultiSelectModule,
-        DropdownModule
+        DropdownModule,
+        InputTextareaModule,
+        CheckboxModule
         // NgxSpinnerModule
     ],
     providers: [],

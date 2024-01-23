@@ -42,7 +42,7 @@ namespace OrderingSystem.OrderSystem.Category
 
         public async Task<List<GetCategoryForViewDto>> GetAllForCreateItem()
         {
-            var teantId = AbpSession.TenantId;
+            //var teantId = AbpSession.TenantId;
 
             var query = from categorys in _repositoryCategory.GetAll().Where(e => e.isDisplay == true && e.IsDeleted == false)
                         select new GetCategoryForViewDto
@@ -50,7 +50,7 @@ namespace OrderingSystem.OrderSystem.Category
                             Id= categorys.Id,
                             CategoryName = categorys.CategoryName,
                             isDisplay = categorys.isDisplay,
-                            TenantId = teantId,
+                            //TenantId = teantId,
                         };
 
             return await query.ToListAsync();

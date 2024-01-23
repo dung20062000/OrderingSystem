@@ -11,7 +11,7 @@
   <div class="modal-body">
     <tabset>
       <tab [heading]='l("ItemDetail")' class="pt-3 px-2">
-        <div class="form-group row required">
+        <div class="form-group row required"> <!--ItemName -->
           <label class="col-md-3 col-form-label" for="itemName">
             {{l("ItemName")}}
           </label>
@@ -32,11 +32,11 @@
             ></abp-validation-summary>
           </div>
         </div>
-        <div class="form-group row required">
+        <div class="form-group row required"> <!--Price -->
           <label class="col-md-3 col-form-label" for="itemPrice">
             {{l("Price")}}
           </label>
-          <div class="col-md-9">
+          <div class="col-md-5">
             <input
               type="number"
               class="form-control"
@@ -53,81 +53,70 @@
               [controlEl]="priceItemEl"
             ></abp-validation-summary>
           </div>
+          <div class="col-md-4">
+            <p-dropdown [options]="listDiscount" [(ngModel)]="selectedDiscount" (onChange)="onDiscountChange()" class="cus_discount" optionLabel="label" [showClear]="true" [placeholder]='l("SelectDiscount")' [ngModelOptions]="{ standalone: true }"></p-dropdown>
+          </div>
+
         </div>
-        <div class="form-group row required">
+         <div class="form-group row required"> <!--danh mục -->
           <label class="col-md-3 col-form-label" for="category">
             {{l("Category")}}
           </label>
-          <div class="card flex justify-content-center">
+          <div class="col-md-5 required">
             <p-multiSelect
               id="category"
               [options]="listCategory"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="odsItem.categoryIds"
               (onChange)="onCategoriesChange($event)"
-               optionLabel="label"
-              [placeholder]='l("SelectCategory")'></p-multiSelect>
-          </div>
-        </div>
-        <!-- <div class="form-group row required">
-          <label class="col-md-3 col-form-label" for="password">
-            {{ "Password" | localize }}
-          </label>
-          <div class="col-md-9">
-            <div class="card flex justify-content-center">
-                <p-dropdown [options]="listDiscount" [(ngModel)]="selectedDiscount.discountId" optionLabel="label" [showClear]="true" [placeholder]='l("SelectDiscount")'></p-dropdown>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-form-label" for="confirmPassword">
-            {{ "ConfirmPassword" | localize }}
-          </label>
-          <div class="col-md-9">
-            <input
-              type="password"
-              class="form-control"
-              name="confirmPassword"
-              id="confirmPassword"
+              optionLabel="label"
+              name="category"
               required
-              maxlength="32"
-              validateEqual="password"
-              reverse="false"
-              ngModel
-              #confirmPasswordModel="ngModel"
-              #confirmPasswordEl
-            />
-            <abp-validation-summary
-              [control]="confirmPasswordModel"
-              [controlEl]="confirmPasswordEl"
-              [customValidationErrors]="confirmPasswordValidationErrors"
+              #categoryEl
+              #categoryMode="ngModel"
+              [placeholder]='l("SelectCategory")'>
+            </p-multiSelect>
+              <abp-validation-summary
+              [control]="categoryMode"
+              [controlEl]="categoryEl.el.nativeElement"
             ></abp-validation-summary>
           </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-form-label" for="emailAddress">
-            {{ "EmailAddress" | localize }}
-          </label>
-          <div class="col-md-9">
-            <input
-              type="email"
-              class="form-control"
-              name="emailAddress"
-              id="emailAddress"
-              required
-              maxlength="256"
-              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
-              [(ngModel)]="user.emailAddress"
-              #emailAddressModel="ngModel"
-              #emailAddressEl
-            />
-            <abp-validation-summary
-              [control]="emailAddressModel"
-              [controlEl]="emailAddressEl"
-            ></abp-validation-summary>
+
+          <div class="col-md-4 cus_checkbox"> <!--is display -->
+              <p-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="odsItem.isDisplay" [binary]="true" inputId="binary" ></p-checkbox>
+              <label class="cus_checkbox_label" for="binary">{{ l("AddMenuNow") }}</label>
           </div>
         </div>
-        <div class="form-group row mb-0">
+        <div class="form-group row"> <!--Description -->
+          <label class="col-md-3 col-form-label">
+            {{ l("Description") }}
+          </label>
+          <div class="col-md-9 mt-2 ">
+              <div class="mb-3 p-float-label">
+                <textarea id="float-input" rows="1" [ngModelOptions]="{ standalone: true }" class="form-control" pInputTextarea [(ngModel)]="odsItem.sortDescription" ></textarea>
+                <label for="float-input">{{l("DescriptionSort")}}</label>
+              </div>
+              <div class="mb-3 p-float-label cus_descript" >
+                <textarea id="float-input" rows="3" [ngModelOptions]="{ standalone: true }" class="form-control" pInputTextarea [(ngModel)]="odsItem.longDescription"></textarea>
+                <label for="float-input">{{l("DescriptionLong")}}</label>
+              </div>
+          </div>
+        </div>
+         <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="imageItem">
+            {{ l("ImageItem") }}
+          </label>
+          <div class="col-md-9">
+            <p-fileUpload  url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" maxFileSize="1000000">
+              <ng-template pTemplate="content">
+                  <!-- <ul *ngIf="uploadedFiles.length">
+                      <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                  </ul> -->
+              </ng-template>
+            </p-fileUpload>
+          </div>
+        </div>
+        <!--<div class="form-group row mb-0">
           <label class="col-md-3 col-form-label">
             {{ "IsActive" | localize }}
           </label>

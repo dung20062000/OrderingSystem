@@ -1,3 +1,21 @@
 .custom-form{
     /* background: linear-gradient(to bottom right, #00c9ff, #92fe9d); */
 }
+.cus_discount{
+    display: flex;
+    flex-direction: row-reverse;
+    height: 38px;
+}
+.cus_descript{
+    margin-top: 20px;
+}
+
+.cus_checkbox{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.cus_checkbox_label{
+    margin-bottom: 0;
+}

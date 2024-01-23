@@ -451,6 +451,76 @@ export class ConfigurationServiceProxy {
 }
 
 @Injectable()
+export class DiscountServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getAllForCreateItem(): Observable<GetDiscountForViewDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Discount/GetAllForCreateItem";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllForCreateItem(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllForCreateItem(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetDiscountForViewDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetDiscountForViewDto[]>;
+        }));
+    }
+
+    protected processGetAllForCreateItem(response: HttpResponseBase): Observable<GetDiscountForViewDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(GetDiscountForViewDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetDiscountForViewDto[]>(null as any);
+    }
+}
+
+@Injectable()
 export class ItemServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -3280,11 +3350,62 @@ export interface IGetCurrentLoginInformationsOutput {
     tenant: TenantLoginInfoDto;
 }
 
+export class GetDiscountForViewDto implements IGetDiscountForViewDto {
+    id: number | undefined;
+    discountName: string | undefined;
+    discDescription: string | undefined;
+
+    constructor(data?: IGetDiscountForViewDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.discountName = _data["discountName"];
+            this.discDescription = _data["discDescription"];
+        }
+    }
+
+    static fromJS(data: any): GetDiscountForViewDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetDiscountForViewDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["discountName"] = this.discountName;
+        data["discDescription"] = this.discDescription;
+        return data;
+    }
+
+    clone(): GetDiscountForViewDto {
+        const json = this.toJSON();
+        let result = new GetDiscountForViewDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetDiscountForViewDto {
+    id: number | undefined;
+    discountName: string | undefined;
+    discDescription: string | undefined;
+}
+
 export class GetItemForViewDto implements IGetItemForViewDto {
     id: number | undefined;
     itemName: string | undefined;
     price: number;
-    discountId: number;
+    discountName: string | undefined;
     categoryName: string | undefined;
     tenantId: number | undefined;
     isDisplay: boolean;
@@ -3306,7 +3427,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
             this.id = _data["id"];
             this.itemName = _data["itemName"];
             this.price = _data["price"];
-            this.discountId = _data["discountId"];
+            this.discountName = _data["discountName"];
             this.categoryName = _data["categoryName"];
             this.tenantId = _data["tenantId"];
             this.isDisplay = _data["isDisplay"];
@@ -3328,7 +3449,7 @@ export class GetItemForViewDto implements IGetItemForViewDto {
         data["id"] = this.id;
         data["itemName"] = this.itemName;
         data["price"] = this.price;
-        data["discountId"] = this.discountId;
+        data["discountName"] = this.discountName;
         data["categoryName"] = this.categoryName;
         data["tenantId"] = this.tenantId;
         data["isDisplay"] = this.isDisplay;
@@ -3350,7 +3471,7 @@ export interface IGetItemForViewDto {
     id: number | undefined;
     itemName: string | undefined;
     price: number;
-    discountId: number;
+    discountName: string | undefined;
     categoryName: string | undefined;
     tenantId: number | undefined;
     isDisplay: boolean;

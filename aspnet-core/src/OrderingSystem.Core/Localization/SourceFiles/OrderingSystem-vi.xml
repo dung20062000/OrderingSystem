@@ -44,5 +44,11 @@
 		<text name="ItemName" value="Tên món" />
 		<text name="SavedSuccessfully" value="Lưu thành công" />
 		<text name="SelectCategory" value="Lựa chọn danh mục" />
+		<text name="SelectDiscount" value="Lựa chọn giảm giá" />
+		<text name="Description" value="Mô tả" />
+		<text name="DescriptionLong" value="Mô tả chi tiết" />
+		<text name="DescriptionSort" value="Mô tả ngắn" />
+		<text name="AddMenuNow" value="Thêm ngay vào Menu" />
+		<text name="ImageItem" value="Hình ảnh" />
 	</texts>
 </localizationDictionary>

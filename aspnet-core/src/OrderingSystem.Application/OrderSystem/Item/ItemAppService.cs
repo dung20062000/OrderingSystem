@@ -5,6 +5,7 @@ using Abp.Linq.Extensions;
 using Abp.UI;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystem.OrderSystem.Category;
+using OrderingSystem.OrderSystem.Discount;
 using OrderingSystem.OrderSystem.Item.Dto;
 using System;
 using System.Collections.Generic;
@@ -19,40 +20,47 @@ namespace OrderingSystem.OrderSystem.Item
         private readonly IRepository<OdsItem, long> _repositoryItem;
         private readonly IRepository<OdsCategory, long> _repositoryCategory;
         private readonly IRepository<OdsItemCategory, long> _repositoryItemCategory;
+        private readonly IRepository<OdsDiscount, long> _repositoryDiscount;
 
         public ItemAppService(
             IRepository<OdsItem, long> repositoryItem,
             IRepository<OdsCategory, long> repositoryCategory,
-            IRepository<OdsItemCategory, long> repositoryItemCategory)
+            IRepository<OdsItemCategory, long> repositoryItemCategory,
+            IRepository<OdsDiscount, long> repositoryDiscount)
         {
             _repositoryItem = repositoryItem;
             _repositoryCategory = repositoryCategory;
             _repositoryItemCategory = repositoryItemCategory;
+            _repositoryDiscount = repositoryDiscount;
         }
 
         public async Task<PagedResultDto<GetItemForViewDto>> GetAll(GetItemInputDto input)
         {
             var teantId = AbpSession.TenantId;
-            var querybase = from items in _repositoryItemCategory.GetAll()
-
-                            join dish in _repositoryItem.GetAll()
+            var querybase = from dish in _repositoryItem.GetAll()
                             .Where(e => e.ItemName.Contains(input.filterText) || input.filterText == null || e.SortDescription.Contains(input.filterText))
-                            on items.ItemId equals dish.Id
+
+                            join itemCate in _repositoryItemCategory.GetAll()
+                            on dish.Id equals itemCate.ItemId
 
                             join categories in _repositoryCategory.GetAll()
-                            on items.CategoryId equals categories.Id
+                            on itemCate.CategoryId equals categories.Id
 
-                            group new { items, dish, categories }
-                            by new { dish.ItemName, dish.Id,  dish.Price} 
+                            join discount in _repositoryDiscount.GetAll()
+                            on dish.DiscountId equals discount.Id
+
+                            group new { itemCate, dish, categories, discount }
+                            by new { dish.ItemName, dish.Id} 
                             into grouped
 
                             select new GetItemForViewDto
                             {
                                 Id = grouped.Key.Id,
                                 ItemName = grouped.Key.ItemName,
-                                Price = grouped.Key.Price,
+                                Price = grouped.Select(x => x.dish.Price).FirstOrDefault(),
                                 CategoryName = string.Join(", ", grouped.Select(e => e.categories.CategoryName)),
-                                DiscountId = grouped.Select(x => x.dish.DiscountId).FirstOrDefault(),
+                                //DiscountId = grouped.Select(x => x.dish.DiscountId).FirstOrDefault(),
+                                DiscountName = grouped.Select(x => x.discount.DiscountName).FirstOrDefault(),
                                 TenantId = teantId,
                                 SortDescription = grouped.Select(x => x.dish.SortDescription).FirstOrDefault(),
                                 LongDescription = grouped.Select(x => x.dish.LongDescription).FirstOrDefault(),
